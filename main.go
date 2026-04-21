@@ -102,7 +102,6 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	//nolint:errcheck
 	defer db.Close()
 
 	store := NewParcelStore(db)

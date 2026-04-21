@@ -49,7 +49,6 @@ func (s ParcelStore) GetByClient(client int) ([]Parcel, error) {
 	if err != nil {
 		return nil, err
 	}
-	//nolint:errcheck
 	defer rows.Close()
 
 	var res []Parcel
