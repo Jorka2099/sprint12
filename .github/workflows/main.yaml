@@ -3,7 +3,8 @@ run-name: New commit pushed
 on:
   push:
     branches: [ main ]
-
+    tags: [ "*" ]
+    
 jobs: 
   build-and-test:
     name: Build and test
