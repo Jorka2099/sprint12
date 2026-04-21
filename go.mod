@@ -1,4 +1,4 @@
-module sprint12
+module github.com/Jorka2099/sprint12
 
 go 1.25.0
 
