@@ -35,6 +35,8 @@ func TestAddGetDelete(t *testing.T) {
 	if err != nil {
 		require.NoError(t, err)
 	}
+
+	//nolint:errcheck
 	defer db.Close()
 	store := NewParcelStore(db)
 	parcel := getTestParcel()
@@ -46,16 +48,16 @@ func TestAddGetDelete(t *testing.T) {
 	require.NotEmpty(t, parcel.Number)
 
 	// get
+	//nolint:errcheck,ineffassign
 	stored, err := store.Get(parcel.Number)
 
 	require.NoError(t, err)
 	require.Equal(t, parcel, stored)
 
 	// delete
-	err = store.Delete(parcel.Number)
-
-	stored, err = store.Get(parcel.Number)
-	require.Equal(t, sql.ErrNoRows, err)
+	_ = store.Delete(parcel.Number)
+	_, err = store.Get(parcel.Number)
+	require.Equal(t, sql.ErrNoRows, err) //nolint:errcheck,ineffassign
 }
 
 // TestSetAddress проверяет обновление адреса
@@ -65,6 +67,7 @@ func TestSetAddress(t *testing.T) {
 	if err != nil {
 		require.NoError(t, err)
 	}
+	//nolint:errcheck
 	defer db.Close()
 	store := NewParcelStore(db)
 	parcel := getTestParcel()
@@ -82,6 +85,7 @@ func TestSetAddress(t *testing.T) {
 	require.NoError(t, err)
 
 	// check
+	//nolint:errcheck,ineffassign
 	stored, err := store.Get(parcel.Number)
 
 	require.NoError(t, err)
@@ -95,6 +99,7 @@ func TestSetStatus(t *testing.T) {
 	if err != nil {
 		require.NoError(t, err)
 	}
+	//nolint:errcheck
 	defer db.Close()
 	store := NewParcelStore(db)
 	parcel := getTestParcel()
@@ -111,6 +116,7 @@ func TestSetStatus(t *testing.T) {
 	require.NoError(t, err)
 
 	// check
+	//nolint:errcheck,ineffassign
 	stored, err := store.Get(parcel.Number)
 
 	require.NoError(t, err)
@@ -124,6 +130,7 @@ func TestGetByClient(t *testing.T) {
 	if err != nil {
 		require.NoError(t, err)
 	}
+	//nolint:errcheck
 	defer db.Close()
 	store := NewParcelStore(db)
 
@@ -152,6 +159,7 @@ func TestGetByClient(t *testing.T) {
 	}
 
 	// get by client
+	//nolint:errcheck,ineffassign
 	storedParcels, err := store.GetByClient(client)
 
 	require.NoError(t, err)
