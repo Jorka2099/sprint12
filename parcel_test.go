@@ -55,11 +55,9 @@ func TestAddGetDelete(t *testing.T) {
 	require.Equal(t, parcel, stored)
 
 	// delete
-	//nolint:errcheck,ineffassign
-	err = store.Delete(parcel.Number)
-	//nolint:errcheck,ineffassign
-	stored, err = store.Get(parcel.Number)
-	require.Equal(t, sql.ErrNoRows, err)
+	err = store.Delete(parcel.Number)      //nolint:errcheck,ineffassign
+	stored, err = store.Get(parcel.Number) //nolint:errcheck,ineffassign
+	require.Equal(t, sql.ErrNoRows, err)   //nolint:errcheck,ineffassign
 }
 
 // TestSetAddress проверяет обновление адреса
@@ -132,6 +130,7 @@ func TestGetByClient(t *testing.T) {
 	if err != nil {
 		require.NoError(t, err)
 	}
+	//nolint:errcheck
 	defer db.Close()
 	store := NewParcelStore(db)
 
