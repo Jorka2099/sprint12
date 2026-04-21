@@ -2,7 +2,7 @@ name: Test and push
 run-name: New commit pushed
 on:
   push:
-    branches: [ "master", "second" ]
+    branches: [ main ]
 
 jobs: 
   build-and-test:
